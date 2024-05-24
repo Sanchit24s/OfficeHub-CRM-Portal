@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ 'Delete Holiday' | translate }}</h2>
+<mat-dialog-content>
+  <p>{{ 'Are you sure you want to delete the following holiday?' | translate }}</p>
+  <div>
+    <strong>{{ 'Holiday Name' | translate }}:</strong> {{ data.name }}
+  </div>
+  <div>
+    <strong>{{ 'Holiday Date' | translate }}:</strong> {{ data.date | date }}
+  </div>
+  <div>
+    <strong>{{ 'Holiday Description' | translate }}:</strong> {{ data.description }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onConfirm()">{{ 'Delete' | translate }}</button>
+  <button mat-raised-button (click)="onCancel()">{{ 'Cancel' | translate }}</button>
+</mat-dialog-actions>

@@ -1,0 +1,60 @@
+.mat-header-cell {
+  text-align: center;
+}
+
+.center-align {
+  text-align: center;
+}
+
+.button-container {
+  margin-bottom: 20px;
+  margin-right: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input-field{
+  width: 320px;
+  height: 70px;
+  margin-left: 25px;
+}
+
+.search-container button{
+  height: 35px;
+  width: 25px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+// .action-button-container {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// .action-button-container button {
+//   /* Add button styles */
+//   font-size: 16px;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+// }
+
+
+
+
+
+.button-container button:focus {
+  outline: none; /* Remove focus outline */
+}
+
+.button-container button:disabled {
+  background-color: #d6d6d6; /* Disabled color */
+  cursor: not-allowed;
+}
+
+.profile {
+  height: 5px;
+  width: 50px;
+  border-radius: 8px;
+}

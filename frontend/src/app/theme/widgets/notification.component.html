@@ -1,0 +1,46 @@
+<!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon matBadge="{{ lengthOfMessage > 0 ? lengthOfMessage : '' }}"
+        [ngClass]="{ 'mat-badge-warn': lengthOfMessage > 0 }">
+        notifications
+    </mat-icon>
+</button> -->
+
+
+<!-- <mat-icon *ngIf="userRole !== 'ADMIN'">
+      notifications
+    </mat-icon> -->
+
+
+<!-- <mat-menu #menu="matMenu" class="notification-menu">
+    <mat-nav-list>
+        <div>
+            <mat-list-item *ngFor="let message of visibleMessages">
+                <mat-icon class="m-x-16" matListItemIcon>info</mat-icon>
+                <a matListItemTitle href="#" style="font-size: 10px;">{{ message.title }}</a>
+            </mat-list-item>
+            <button class="viewButton" mat-menu-item (click)="showAllNotifications()">View All</button>
+        </div>
+    </mat-nav-list>
+</mat-menu> -->
+
+<!-- notification.component.html -->
+<div class="notification-container">
+    <button class="notification-button" (click)="toggleMenu()">
+        <span class="notification-icon">
+            <span class="notification-badge" *ngIf="lengthOfMessage > 0">{{ lengthOfMessage }}</span>
+            <span class="material-icons">notifications</span>
+        </span>
+    </button>
+
+    <div *ngIf="menuOpen" class="notification-menu" (clickOutside)="closeMenu()">
+        <ul class="notification-list">
+            <li *ngFor="let message of visibleMessages" class="notification-item">
+                <span class="material-icons notification-icon-small">info</span>
+                <a href="#" class="notification-title">{{ message.title }}</a>
+            </li>
+            <li class="view-all-item">
+                <button class="view-all-button" (click)="showAllNotifications()">View All</button>
+            </li>
+        </ul>
+    </div>
+</div>

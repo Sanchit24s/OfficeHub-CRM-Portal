@@ -1,0 +1,360 @@
+<page-header class="p-t-32 p-b-48 m-b--24 bg-gray-900" title="Personal Profile" hideBreadcrumb>
+</page-header>
+
+<div class="row">
+  <div class="col-sm-4 col-md-4 col-lg-3">
+    <mat-card>
+      <mat-card-content>
+        <div class="text-center">
+          <img class="m-b-8 r-full" [src]="user.profileImage" alt="" width="80">
+          <h2 class="m-t-0 m-b-8 f-w-400" style="font-size: 18px;">{{ user.firstName + ' ' + user.lastName }}</h2>
+          <p class="m-t-0 m-b-8" style="font-size: 18px;">{{ user.designation }}</p>
+          <!-- <p class="m-t-0 text-grey-500">I like reading, writing and drawing.</p> -->
+          <p
+            *ngIf="user.currentAddress || user.currentCity || user.currentState || user.currentCountry || user.currentPinCode">
+            {{ user.currentAddress ? user.currentAddress + ', ' : '' }}
+            {{ user.currentCity ? user.currentCity + ', ' : '' }}
+            {{ user.currentState ? user.currentState + ', ' : '' }}
+            {{ user.currentCountry ? user.currentCountry + ', ' : '' }}
+            {{ user.currentPinCode || '' }}
+          </p>
+
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-sm-8 col-md-8 col-lg-9">
+    <mat-card>
+      <mat-tab-group>
+        <mat-tab label="About">
+          <div class="m-16">
+            <!-- <img class="d-block w-full" src="assets/images/pixabay/2.jpg" alt=""> -->
+            <!-- <h3>Aenean viverra arcu nec pellentesque ultrices. In erat purus, adipiscing nec lacinia at,
+                ornare ac eros.
+              </h3> -->
+            <form [formGroup]="aboutForm" class="form-field-full">
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="Enter your first name" formControlName="firstName" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Enter your last name" formControlName="lastName" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Enter email" formControlName="email" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput placeholder="Enter phone number" type="number" formControlName="phone" readonly>
+                    <mat-icon matSuffix>smartphone</mat-icon>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Gender</mat-label>
+                    <mat-select formControlName="gender" readonly>
+                      <mat-option>-- None --</mat-option>
+                      <mat-option value="Male">Male</mat-option>
+                      <mat-option value="Female">Female</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Address">
+          <div class="m-16">
+            <h2>Current Address Details</h2>
+            <form [formGroup]="currentAddressForm" class="form-field-full">
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Current Address</mat-label>
+                    <textarea matInput placeholder="Enter your current address" formControlName="currentAddress"
+                      style="height: 80px;" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input matInput placeholder="Enter your city" formControlName="currentCity" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>State</mat-label>
+                    <input matInput placeholder="Enter your state" formControlName="currentState" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <input matInput placeholder="Enter your country" formControlName="currentCountry" readonly>
+                    <mat-icon matSuffix>public</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Pin Code</mat-label>
+                    <input matInput placeholder="Enter your pin code" formControlName="currentPinCode" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="m-16">
+            <div class="row">
+              <div class="col-sm-6 col-xl-4">
+                <mat-checkbox formControlName="sameAsCurrentAddress">Same as
+                  current address</mat-checkbox>
+              </div>
+            </div>
+
+            <h2>Permanent Address Details</h2>
+            <form [formGroup]="permanentAddressForm" class="form-field-full">
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Permanent Address</mat-label>
+                    <textarea matInput placeholder="Enter your permanent address" formControlName="permanentAddress"
+                      style="height: 80px;" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>City</mat-label>
+                    <input matInput placeholder="Enter your city" formControlName="permanentCity" readonly>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>State</mat-label>
+                    <input matInput placeholder="Enter your state" formControlName="permanentState" readonly>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Country</mat-label>
+                    <input matInput placeholder="Enter your country" formControlName="permanentCountry" readonly>
+                    <mat-icon matSuffix>public</mat-icon>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Pin Code</mat-label>
+                    <input matInput placeholder="Enter your pin code" formControlName="permanentPinCode" readonly>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </mat-tab>
+        <mat-tab label="BioData">
+          <div class="m-16">
+            <form [formGroup]="bioDataForm" class="form-field-full">
+              <!-- Employee ID -->
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Employee ID</mat-label>
+                    <input matInput placeholder="Enter employee ID" formControlName="employeeId" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Job Title</mat-label>
+                    <input matInput placeholder="Enter job title" formControlName="designation" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Date of Joining</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="createdAt"
+                      readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="true"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="dobPicker" placeholder="Choose a date"
+                      formControlName="dateOfBirth" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dobPicker disabled="true"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input matInput formControlName="age" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Blood Group</mat-label>
+                    <input matInput placeholder="Enter blood group" formControlName="bloodGroup" readonly>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Married Status</mat-label>
+                    <mat-select formControlName="marriedStatus" readonly>
+                      <mat-option value="No">No</mat-option>
+                      <mat-option value="Yes">Yes</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <ng-container *ngIf="bioDataForm.get('marriedStatus')?.value === 'Yes'">
+                  <div class="col-sm-6 col-xl-4">
+                    <mat-form-field>
+                      <mat-label>Anniversary Date</mat-label>
+                      <input matInput [matDatepicker]="anniversaryPicker" placeholder="Select anniversary date"
+                        formControlName="anniversaryDate" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="anniversaryPicker"></mat-datepicker-toggle>
+                      <mat-datepicker #anniversaryPicker disabled="true"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-sm-6 col-xl-4">
+                    <mat-form-field>
+                      <mat-label>Partner Name</mat-label>
+                      <input matInput placeholder="Enter partner name" formControlName="partnerName" readonly>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-6 col-xl-4">
+                    <mat-form-field>
+                      <mat-label>Do you have children?</mat-label>
+                      <mat-select formControlName="haveChildren" readonly>
+                        <mat-option value="No">No</mat-option>
+                        <mat-option value="Yes">Yes</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <ng-container *ngIf="bioDataForm.get('haveChildren')?.value === 'Yes'">
+                    <div class="col-sm-6 col-xl-4">
+                      <mat-form-field>
+                        <mat-label>Children Names</mat-label>
+                        <input matInput placeholder="Enter children names" formControlName="childrenNames" readonly>
+                      </mat-form-field>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Work Experience</mat-label>
+                    <textarea matInput placeholder="Enter work experience" formControlName="workExperience"
+                      readonly></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Educational Qualifications</mat-label>
+                    <textarea matInput placeholder="Enter educational qualifications"
+                      formControlName="educationalQualifications" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Certifications</mat-label>
+                    <textarea matInput placeholder="Enter certifications" formControlName="certifications"
+                      readonly></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Skills</mat-label>
+                    <textarea matInput placeholder="Enter skills" formControlName="skills" readonly></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Important Dates">
+          <div class="m-16">
+            <form [formGroup]="bioDataForm" class="form-field-full">
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field>
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="dobPicker" placeholder="Select date of birth"
+                      formControlName="dateOfBirth" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="dobPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dobPicker disabled="true"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6 col-xl-4">
+                  <mat-form-field *ngIf="bioDataForm.get('marriedStatus')?.value === 'Yes'">
+                    <mat-label>Anniversary Date</mat-label>
+                    <input matInput [matDatepicker]="anniversaryPicker" placeholder="Select anniversary date"
+                      formControlName="anniversaryDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="anniversaryPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #anniversaryPicker [disabled]="true"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+    </mat-card>
+    <router-outlet></router-outlet>
+  </div>
+</div>

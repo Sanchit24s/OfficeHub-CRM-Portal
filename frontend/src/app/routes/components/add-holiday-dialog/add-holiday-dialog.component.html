@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{ 'Add Holiday' | translate }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="addHolidayForm" class="holiday-form">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'Holiday Name' | translate }}</mat-label>
+      <input matInput placeholder="{{ 'Enter Holiday Name' | translate }}" formControlName="name" required>
+      <mat-error *ngIf="addHolidayForm.get('name')?.invalid">
+        <span *ngIf="addHolidayForm.get('name')?.errors?.required">{{ 'Please Enter' | translate }} <strong>{{ 'Holiday Name' | translate }}</strong></span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'Holiday Date' | translate }}</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="addHolidayForm.get('date')?.invalid">
+        <span *ngIf="addHolidayForm.get('date')?.errors?.required">{{ 'Please Enter' | translate }} <strong>{{ 'Holiday Date' | translate }}</strong></span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>{{ 'Holiday Description' | translate }}</mat-label>
+      <textarea matInput placeholder="{{ 'Enter Holiday Description' | translate }}" formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="addHoliday()" [disabled]="addHolidayForm.invalid">{{ 'Add Holiday' | translate }}</button>
+  <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

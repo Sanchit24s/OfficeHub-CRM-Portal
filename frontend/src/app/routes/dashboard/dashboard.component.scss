@@ -1,0 +1,165 @@
+
+
+.mat-mdc-button-base {
+  margin: 4px;
+}
+
+.employee-status{
+  margin-left: 30px;
+}
+
+.employee {
+  margin-left: 40px;
+}
+
+.check-in{
+  border: 0px solid;
+  border-left: 5px solid rgb(2, 120, 47);
+  background-color: #383838;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 900px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.check-out{
+  border: 0px solid;
+  border-left: 5px solid rgb(120, 2, 2);
+  background-color: #383838;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 900px;
+}
+
+.leave-users{
+  border: 0px solid;
+  border-left: 5px solid rgb(216, 111, 24);
+  background-color: #383838;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  width: 900px;
+}
+
+.check-in h4, .check-out h4, .leave-users h4{
+  padding-left: 40px;
+  padding-top: 15px;
+  padding-bottom: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.check-in .no-check-in {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.check-out .no-check-out {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.leave-users .on-leave {
+  padding: 0 0 0 0;
+  margin: 0 0 0 0;
+}
+
+.check-in .user-list, 
+.check-out .user-list,
+.leave-users .user-list{
+  padding-top: 0px;
+  padding-bottom: 20px;
+  list-style: none;
+  align-items: center;
+}
+
+.check-in .user-list li, 
+.check-out .user-list li,
+.leave-users .user-list li{
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
+.check-in .user-list li:last-child, 
+.check-out .user-list li:last-child,
+.leave-users .user-list li:last-child{
+  margin-right: 0;
+}
+
+.check-in ul li img, 
+.check-out ul li img,
+.leave-users ul li img{
+  width: 70px;
+  height: 70px;
+  margin-bottom: 0px;
+  padding: 0 0 0 0;
+  border-radius: 50rem;
+  margin-top: 0px;
+}
+
+.check-in ul li p, 
+.check-out ul li p,
+.leave-users ul li p {
+  font-size: 12px;
+  margin: 0 0 0 0;
+}
+
+
+
+.sidebar {
+  position: fixed;
+  left: 1220px;
+  top: 80px; 
+  right: 20px;
+  width: 300px;
+  align-items: center;
+  // border: 1px solid black;
+}
+
+.employee-birthdays,
+.upcoming-holidays {
+  padding: 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  
+}
+
+.employee-birthdays h5 {
+  text-align: center;
+}
+
+.employee-birthdays table {
+  margin-left: 20px;
+  padding-bottom: 20px;
+  border-spacing: 22px;
+  background-color: #383838;
+}
+
+.upcoming-holidays h5 {
+  text-align: center;
+}
+
+.upcoming-holidays table {
+  margin-left: 20px;
+  padding-bottom: 20px;
+  border-spacing: 22px;
+  background-color: #383838;
+}
+
+.employee-birthdays table, .upcoming-holidays table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employee-birthdays th, .employee-birthdays td, .upcoming-holidays th, .upcoming-holidays td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+

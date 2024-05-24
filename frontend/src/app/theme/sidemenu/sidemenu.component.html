@@ -1,0 +1,35 @@
+<div class="sidebar">
+  <ul class="sidebar-menu">
+    <li><a routerLink="/dashboard"><mat-icon class="icon">dashboard</mat-icon> <span class="text">Dashboard</span></a></li>
+    <li><a routerLink="/profile/overview"><mat-icon class="icon">person</mat-icon> <span class="text">Profile</span></a></li>
+    <li>
+      <a [routerLink]="isAdmin ? '/attendance' : '/attendance-display'"><mat-icon class="icon">event_note</mat-icon> <span class="text">Attendance</span></a>
+    </li>
+    <li><a routerLink="/holiday"><mat-icon class="icon">date_range</mat-icon> <span class="text">Holidays</span></a></li>
+    <li>
+      <a [routerLink]="isAdmin ? '/leave-admin' : '/leave'"><mat-icon class="icon">flight_takeoff</mat-icon> <span class="text">Leave</span></a>
+    </li>
+    <li>
+      <a [routerLink]="isAdmin ? '/notifications' : '/notification'"><mat-icon class="icon">notifications</mat-icon> <span class="text">Notifications</span></a>
+    </li>
+    <li><a routerLink="/policy"><mat-icon class="icon">policy</mat-icon> <span class="text">Policy</span></a></li>
+    <li *ngIf="isAdmin"><a routerLink="/get-users"><mat-icon class="icon">people</mat-icon> <span class="text">Employees</span></a></li>
+    <!-- Add more menu items as needed -->
+  </ul>
+</div>
+
+
+
+
+
+<div class="checkinout-container">
+  <div class="checkinout" *ngIf="checkInTime">
+    Check-in Time: {{ checkInTime | date:'shortTime' }}
+  </div>
+  <div class="checkinout" *ngIf="checkOutTime">
+    Check-out Time: {{ checkOutTime | date:'shortTime' }}
+  </div>
+  <button mat-raised-button color="primary" (click)="toggleCheckInOut()">
+    {{ isCheckedIn ? 'Check Out' : 'Check In' }}
+  </button>
+</div>

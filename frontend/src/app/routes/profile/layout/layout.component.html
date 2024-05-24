@@ -1,0 +1,44 @@
+<page-header class="p-t-32 p-b-48 m-b--24 bg-gray-900"
+             title="Personal Profile" hideBreadcrumb>
+</page-header>
+
+<div class="row">
+  <div class="col-sm-4 col-md-4 col-lg-3">
+    <mat-card>
+      <mat-card-content>
+        <div class="text-center">
+          <img class="m-b-8 r-full" [src]="user.profileImage" alt="" width="80" style="border-radius: 50%;">
+          <h2 class="m-t-0 m-b-8 f-w-400" style="font-size: 18px;">{{ user.firstName + ' ' + user.lastName }}</h2>
+          <p class="m-t-0 m-b-8" style="font-size: 18px;">{{ user.designation }}</p>
+          <!-- <p class="m-t-0 text-grey-500">I like reading, writing and drawing.</p> -->
+          <p *ngIf="user.currentAddress || user.currentCity || user.currentState || user.currentCountry || user.currentPinCode">
+            {{ user.currentAddress ? user.currentAddress + ', ' : '' }}
+            {{ user.currentCity ? user.currentCity + ', ' : '' }}
+            {{ user.currentState ? user.currentState + ', ' : '' }}
+            {{ user.currentCountry ? user.currentCountry + ', ' : '' }}
+            {{ user.currentPinCode || '' }}
+          </p>
+          
+          
+
+          <!-- <a mat-raised-button color="primary" href="https://github.com/nzbin" target="_blank" style="font-size: 14px;">
+            Follow Me <i class="fab fa-linkedin"></i></a>
+          <button mat-raised-button color="accent" class="m-l-8">Contact Me</button> -->
+        </div>
+        <!-- <mat-nav-list class="m-x--16 m-b--16 m-t-16">
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/profile/overview">
+            <mat-icon matListItemIcon>account_circle</mat-icon> Overview
+          </a>
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="/profile/settings">
+            <mat-icon matListItemIcon>settings</mat-icon> Settings
+          </a>
+        </mat-nav-list> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="col-sm-8 col-md-8 col-lg-9">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,128 @@
+<h2 mat-dialog-title>Register</h2>
+<div mat-dialog-content>
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <!-- Row for First Name and Last Name -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" placeholder="Enter your first name" maxlength="35" pattern="^[a-zA-Z ]+$" required>
+          <mat-error *ngIf="registerForm.get('firstName')?.invalid">
+            <span *ngIf="registerForm.get('firstName')?.hasError('required')">{{'validations.required' | translate}}</span>
+            <span *ngIf="registerForm.get('firstName')?.hasError('pattern')">{{'Invalid Name' | translate}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Enter your last name" maxlength="35" pattern="^[a-zA-Z ]+$" required>
+          <mat-error *ngIf="registerForm.get('lastName')?.invalid">
+            <span *ngIf="registerForm.get('lastName')?.hasError('required')">{{'validations.required' | translate}}</span>
+            <span *ngIf="registerForm.get('lastName')?.hasError('pattern')">{{'Invalid Name' | translate}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Row for Email and Phone Number -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Enter your email" required>
+          <mat-error *ngIf="registerForm.get('email')?.invalid">
+            <span *ngIf="registerForm.get('email')?.hasError('required')">{{'validations.required' | translate}}</span>
+            <span *ngIf="registerForm.get('email')?.hasError('email')">{{'Invalid Email' | translate}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" type="tel" placeholder="Enter your phone number" pattern="^[0-9]{10}$" required>
+          <mat-error *ngIf="registerForm.get('phone')?.invalid">
+            <span *ngIf="registerForm.get('phone')?.hasError('required')">{{'validations.required' | translate}}</span>
+            <span *ngIf="registerForm.get('phone')?.hasError('pattern')">{{'Invalid Phone Number' | translate}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Row for Password and Confirm Password -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{'password' | translate}}</mat-label>
+          <input matInput type="password" formControlName="password" placeholder="Enter your password" required>
+          <mat-error *ngIf="registerForm.get('password')?.invalid">
+            <span>{{'validations.required' | translate}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{'confirm_password' | translate}}</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" required>
+          <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+            <span>{{'validations.required' | translate}}</span>
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mismatch')"
+                     translate [translateParams]="{value: 'login.password' | translate}">
+            <span>{{'Password Mismatch'}}</span>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Single Column for Designation -->
+    <!-- Row for Designation and Role -->
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Designation</mat-label>
+          <mat-select formControlName="designation" required>
+            <mat-option value="Developer">Developer</mat-option>
+            <mat-option value="Designer">Designer</mat-option>
+            <mat-option value="HR">HR</mat-option>
+          </mat-select>
+          <mat-error *ngIf="registerForm.get('designation')?.hasError('required')">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" required>
+            <mat-option value="EMPLOYEE">Employee</mat-option>
+            <mat-option value="ADMIN">Admin</mat-option>
+          </mat-select>
+          <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
+            {{'validations.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <!-- Gender Selection -->
+    <div class="w-100">
+      <label>Gender:</label>
+      <mat-radio-group formControlName="gender" required>
+        <mat-radio-button value="Male">Male</mat-radio-button>
+        <mat-radio-button value="Female">Female</mat-radio-button>
+      </mat-radio-group>
+      <!-- <mat-error *ngIf="registerForm.get('gender')?.hasError('required')">
+        {{'validations.required' | translate}}
+      </mat-error> -->
+    </div>
+
+    <!-- Submit Button -->
+    <div mat-dialog-actions class="button-container">
+        <button mat-raised-button color="warn" (click)="closeDialog()">Cancel</button>
+        <button class="register-button" mat-raised-button color="primary" [disabled]="!registerForm.valid">
+          {{'register' | translate}}
+        </button>
+      </div>      
+  </form>
+</div>

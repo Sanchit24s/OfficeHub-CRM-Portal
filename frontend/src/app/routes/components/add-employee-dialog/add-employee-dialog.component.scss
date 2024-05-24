@@ -1,0 +1,10 @@
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    gap: 8px; /* Add space between buttons */
+  }
+  
+  .mat-raised-button {
+    min-width: auto; /* Allow buttons to shrink */
+  }
+  

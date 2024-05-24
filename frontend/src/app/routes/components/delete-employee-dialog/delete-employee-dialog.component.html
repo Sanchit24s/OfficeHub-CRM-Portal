@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ 'Delete User' | translate }}</h2>
+<mat-dialog-content>
+  <p>{{ 'Are you sure you want to delete the following User?' | translate }}</p>
+  <div>
+    <strong>{{ 'First Name' | translate }}:</strong> {{ data.firstName }}
+  </div>
+  <div>
+    <strong>{{ 'Last Name' | translate }}:</strong> {{ data.lastName }}
+  </div>
+  <div>
+    <strong>{{ 'User Email' | translate }}:</strong> {{ data.email }}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="onConfirm()">{{ 'Delete' | translate }}</button>
+  <button mat-raised-button (click)="onCancel()">{{ 'Cancel' | translate }}</button>
+</mat-dialog-actions>

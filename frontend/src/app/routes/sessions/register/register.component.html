@@ -1,0 +1,111 @@
+<div class="d-flex w-full h-full">
+  <mat-card class="m-auto" style="max-width: 760px;">
+    <mat-card-header class="m-b-24">
+      <mat-card-title>Registration</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="form-field-full" [formGroup]="registerForm" (ngSubmit)="submit()">
+        <!-- Row for First Name and Last Name -->
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="Enter your first name" required>
+              <mat-error *ngIf="registerForm.get('firstName')?.invalid">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="Enter your last name" required>
+              <mat-error *ngIf="registerForm.get('lastName')?.invalid">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Row for Email and Phone Number -->
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" type="email" placeholder="Enter your email" required>
+              <mat-error *ngIf="registerForm.get('email')?.invalid">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phone" type="tel" placeholder="Enter your phone number" required>
+              <mat-error *ngIf="registerForm.get('phone')?.invalid">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Row for Password and Confirm Password -->
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{'password' | translate}}</mat-label>
+              <input matInput type="password" formControlName="password" placeholder="Enter your password" required>
+              <mat-error *ngIf="registerForm.get('password')?.invalid">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>{{'confirm_password' | translate}}</mat-label>
+              <input matInput type="password" formControlName="confirmPassword" placeholder="Confirm your password" required>
+              <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+                <span>{{'validations.required' | translate}}</span>
+              </mat-error>
+              <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('mismatch')"
+                         translate [translateParams]="{value: 'login.password' | translate}">
+                <span>{{'validations.inconsistent'}}</span>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Single Column for Designation -->
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Designation</mat-label>
+          <mat-select formControlName="designation">
+            <mat-option value="employee">Employee</mat-option>
+            <mat-option value="developer">Developer</mat-option>
+            <mat-option value="designer">Designer</mat-option>
+            <mat-option value="hr">HR</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Gender Selection -->
+        <div class="w-100">
+          <label>Gender:</label>
+          <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="prefer-not-to-say">Prefer not to say</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="w-full m-y-16" mat-raised-button color="primary">
+          {{'register' | translate}}
+        </button>
+
+        <div>{{'Already Registered' | translate}}?
+          <a routerLink="/auth/login">{{'Click here to Login' | translate}}</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

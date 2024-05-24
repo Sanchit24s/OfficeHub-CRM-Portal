@@ -1,0 +1,14 @@
+<button mat-raised-button color="primary" (click)="openAddLeaveDialog()">Add New Application</button>
+
+<div class="leave-applications-container">
+    <h2>Leave Applications</h2>
+    <ul class="leave-application-list">
+      <li class="leave-application-item" *ngFor="let application of leaveApplications">
+        <p><strong>Start Date:</strong> {{ application.startDate | date:'mediumDate' }}</p>
+        <p><strong>End Date:</strong> {{ application.endDate | date:'mediumDate' }}</p>
+        <p><strong>Reason:</strong> {{ application.reason }}</p>
+        <p><strong>Status:</strong> <span [class]="'status-' + application.status.toLowerCase()">{{ application.status }}</span></p>
+      </li>
+    </ul>
+  </div>
+

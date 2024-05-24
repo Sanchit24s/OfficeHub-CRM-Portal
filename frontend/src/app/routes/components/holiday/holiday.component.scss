@@ -1,0 +1,62 @@
+/* holiday.component.scss */
+
+.holiday-container {
+    margin: 20px;
+    h2 {
+      color: #ffffff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      th, td {
+        //border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        background-color: #383838;
+        border: 1px solid rgb(65, 63, 63);
+      }
+      th {
+        background-color: #212121;
+      }
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+      li {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-top: 5px;
+      }
+    }
+  }
+
+.holiday-container table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.holiday-container th,
+.holiday-container td {
+  padding: 8px;
+  text-align: left;
+}
+
+.action-buttons {
+  border: none;
+  padding: 0;
+}
+
+.action-buttons td{
+  padding: 10px;
+  margin: auto;
+  border: none;
+}
+
+.action-buttons button {
+  margin: 8px;
+}
+
+.action-buttons button:last-child {
+  margin-right: 0;
+}

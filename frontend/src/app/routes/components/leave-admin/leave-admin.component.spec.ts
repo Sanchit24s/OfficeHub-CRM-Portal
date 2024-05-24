@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { LeaveAdminComponent } from './leave-admin.component';
+
+describe('LeaveAdminComponent', () => {
+  let component: LeaveAdminComponent;
+  let fixture: ComponentFixture<LeaveAdminComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [LeaveAdminComponent]
+    });
+    fixture = TestBed.createComponent(LeaveAdminComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

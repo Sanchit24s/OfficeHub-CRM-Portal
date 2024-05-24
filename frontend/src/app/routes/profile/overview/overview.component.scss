@@ -1,0 +1,11 @@
+.m-16 ul li{
+    list-style: none;
+    display: flex; 
+    align-items: center;
+}
+
+.m-16 ul li mat-icon{
+    margin-top: 5px;
+    margin-left: 4px;
+    font-size: 18px;
+}
