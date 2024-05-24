@@ -2,65 +2,70 @@
 
 /* Container */
 .leave-applications-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-  }
-  
-  /* Header */
-  .leave-applications-container h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 30px;
-    color: #333333;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Leave Application List */
-  .leave-application-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .leave-application-item {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    backdrop-filter: blur(2px);
-  }
-  
-  .leave-application-item p {
-    margin: 10px 0;
-    color: #333333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  .leave-application-item p strong {
-    font-weight: bold;
-  }
-  
-  /* Status */
-  .status-pending {
-    color: #ff9800;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  .status-approved {
-    color: #4caf50;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
-  
-  .status-rejected {
-    color: #f44336;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-  }
+  max-width: 100%;
+  margin: 0;
+  padding: 5px;
+  background-color: #383838;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  // backdrop-filter: blur(5px);
+}
+
+/* Header */
+.leave-applications-container h2 {
+  font-size: 28px;
+  // font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-align: center;
+
+}
+
+
+.leave-application-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+  gap: 10px; /* Gap between items */
+  list-style-type: none;
+  padding: 0;
+}
+
+.leave-application-item {
+  background-color: #272424;
+  width: 400px;
+  padding: 10px;
+
+  border-radius: 6px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  backdrop-filter: blur(2px);
+}
+
+.leave-application-item p {
+  margin: 10px 0;
+  color: #bcbaba;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.leave-application-item p strong {
+  font-weight: bold;
+}
+
+/* Status */
+.status-pending {
+  color: #ff9800;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-approved {
+  color: #4caf50;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-rejected {
+  color: #f44336;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}

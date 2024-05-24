@@ -1,0 +1,19 @@
+/* Ensure html and body elements take full height */
+
+.forgot {
+  text-align: right;
+}
+
+/* Apply full-screen background to the container */
+.main {
+  display: flex;
+
+  background-image: url('../../../../assets/images/nature.jpg'); /* Replace with your image URL */
+  background-size: cover; /* Ensure the background covers the entire container */
+
+  width: 100vw; /* Ensure the container takes full width */
+  height: 100%; /* Ensure the container takes full height of the viewport */
+}
+form div a {
+  text-align: right;
+}

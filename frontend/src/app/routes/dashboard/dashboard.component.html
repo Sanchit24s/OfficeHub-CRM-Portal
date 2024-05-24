@@ -1,86 +1,97 @@
-<div class="employee-status">
-  <h1>Today's Employee Status</h1>
-</div>
+<div class="main">
+  <div class="employee">
+    <h1>Today's Employee Status</h1>
+    <div class="check-in">
+      <h4>Checked-in</h4>
+      <ul class="user-list" *ngIf="employees$ | async as employees; else loading">
+        <p *ngIf="checkedInUsers.length === 0" class="no-check-in">No employee checked-in yet</p>
+        <li *ngFor="let employee of checkedInUsers">
+          <div class="container">
+            <img
+              *ngIf="employee"
+              [src]='employee.profileImage'
+              alt="profile"
+            />
+            <p>{{ employee.userName }}</p>
+            <p>{{ employee.checkIn | date : 'mediumTime' }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #loading>Loading...</ng-template>
 
-<div class="employee">
-  <div class="check-in">
-    <h4>Checked-in</h4>
-    <ul class="user-list" *ngIf="(employees$ | async) as employees; else loading">
-      <p *ngIf="checkedInUsers.length === 0" class="no-check-in">No employee checked-in yet</p>
-      <li *ngFor="let employee of checkedInUsers">
-        <div class="container">
-          <img *ngIf="employee" [src]='employee.profileImage' alt="profile">
-          <p>{{ employee.userName }}</p>
-          <p>{{ employee.checkIn | date:'mediumTime' }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <ng-template #loading>Loading...</ng-template>
+    <div class="check-out">
+      <h4>Checked-out</h4>
+      <ul class="user-list" *ngIf="employees$ | async as employees; else loading">
+        <p *ngIf="checkedOutUsers.length === 0" class="no-check-out">No employee checked-out yet</p>
+        <li *ngFor="let employee of checkedOutUsers">
+          <div class="container">
+            <img
+              *ngIf="employee"
+              [src]='employee.profileImage'
+              alt="profile"
+            />
+            <p>{{ employee.userName }}</p>
+            <p>{{ employee.checkOut | date : 'mediumTime' }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
 
-  <div class="check-out">
-    <h4>Checked-out</h4>
-    <ul class="user-list" *ngIf="(employees$ | async) as employees; else loading">
-      <p *ngIf="checkedOutUsers.length === 0" class="no-check-out">No employee checked-out yet</p>
-      <li *ngFor="let employee of checkedOutUsers">
-        <div class="container">
-          <img *ngIf="employee" [src]='employee.profileImage' alt="profile">
-          <p>{{ employee.userName }}</p>
-          <p>{{ employee.checkOut | date:'mediumTime' }}</p>
-        </div>
-      </li>
-    </ul>
+    <div class="leave-users">
+      <h4>On Leave</h4>
+      <ul class="user-list" *ngIf="employees$ | async as employees; else loading">
+        <p *ngIf="usersOnLeave.length === 0" class="on-leave">No employee on leave today.</p>
+        <li *ngFor="let employee of usersOnLeave">
+          <div class="container">
+            <img
+              *ngIf="employee"
+              [src]='employee.profileImage'
+              alt="profile"
+            />
+            <p>{{ employee.userName }}</p>
+            <p>{{ employee.date | date : 'shortDate' }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="leave-users">
-    <h4>On Leave</h4>
-    <ul class="user-list" *ngIf="(employees$ | async) as employees; else loading">
-      <p *ngIf="usersOnLeave.length === 0" class="on-leave">No employee on leave today.</p>
-      <li *ngFor="let employee of usersOnLeave">
-        <div class="container">
-          <img *ngIf="employee" [src]='employee.profileImage' alt="profile">
-          <p>{{ employee.userName }}</p>
-          <p>{{ employee.date | date:'shortDate' }}</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+  <div class="sidebar">
+    <div class="employee-birthdays">
+      <h1>Upcoming employee birthdays</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let birthday of employeeBirthdays">
+            <td>{{ birthday.firstName + ' ' + birthday.lastName }}</td>
+            <td>{{ birthday.dateOfBirth | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-<div class="sidebar">
-  <div class="employee-birthdays">
-    <h5>Upcoming employee birthdays</h5>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Date of Birth</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let birthday of employeeBirthdays">
-          <td>{{ birthday.firstName + ' ' + birthday.lastName }}</td>
-          <td>{{ birthday.dateOfBirth | date }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <div class="upcoming-holidays">
-    <h5>Upcoming Holidays</h5>
-    <table>
-      <thead>
-        <tr> 
-          <th>Name</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let holiday of holidays">
-          <td>{{ holiday.name}}</td>
-          <td>{{ holiday.date | date }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="upcoming-holidays">
+      <h1>Upcoming Holidays</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let holiday of holidays">
+            <td>{{ holiday.name }}</td>
+            <td>{{ holiday.date | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
