@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const findAll = async (req, res) => {
   try {
-    const holiday = await holidayModel.find();
+    const holiday = await holidayModel.find().sort({ date: 1 });
     res.status(200).json(holiday);
   } catch (error) {
     res.status(404).json({ message: error.message });

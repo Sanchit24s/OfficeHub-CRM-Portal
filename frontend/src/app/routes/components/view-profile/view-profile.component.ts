@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 export class ViewProfileComponent implements OnInit {
   loginUserId: string | null = null;
   user!: Users;
+  userRole: string | null = null;
 
 
   aboutForm = this.fb.nonNullable.group({
@@ -69,33 +70,51 @@ export class ViewProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('userRole');
 
-    this.route.params.subscribe(params => {
-      const employeeId = params.id;
+    if (this.userRole === 'ADMIN') {
+      this.route.params.subscribe(params => {
+        const employeeId = params.id;
 
-      this.http.post<any>(`${environment.apiUrl}/user/empId`, { employeeId }).subscribe(
-        (Id) => {
-          this.userService.getUser(Id).subscribe(
-            (data) => {
-              this.user = data;
-              this.setFormValues(this.user);
-            },
-            (error) => {
-              this.router.navigate(['/404']);
-              console.log('Error fetching values', error);
-            }
-          );
+        this.http.post<any>(`${environment.apiUrl}/user/empId`, { employeeId }).subscribe(
+          (Id) => {
+            this.userService.getUser(Id).subscribe(
+              (data) => {
+                this.user = data;
+                this.setFormValues(this.user);
+              },
+              (error) => {
+                this.router.navigate(['/404']);
+                console.log('Error fetching values', error);
+              }
+            );
+          },
+          (error) => {
+            this.router.navigate(['/404']);
+            console.log('Error fetching values', error);
+          }
+        );
+      });
+    }
+    else {
+      this.loginUserId = localStorage.getItem('userId');
+      this.userService.getUser(this.loginUserId).subscribe(
+        (data) => {
+          this.user = data;
+          this.setFormValues(this.user);
         },
         (error) => {
           this.router.navigate(['/404']);
           console.log('Error fetching values', error);
         }
       );
-    });
+    }
+
+
   }
 
   setFormValues(user: Users): void {
-    if(user !== null || user !== undefined || user !== '') {
+    if (user !== null || user !== undefined || user !== '') {
       this.aboutForm.patchValue({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -103,12 +122,12 @@ export class ViewProfileComponent implements OnInit {
         phone: user.phone,
         gender: user.gender,
       });
-  
+
       const hasCompleteCurrentAddress = user.currentAddress && user.currentCity &&
         user.currentState && user.currentCountry && user.currentPinCode;
       const hasCompletePermanentAddress = user.permanentAddress && user.permanentCity &&
         user.permanentState && user.permanentCountry && user.permanentPinCode;
-  
+
       if (hasCompleteCurrentAddress) {
         this.currentAddressForm.patchValue({
           currentAddress: user.currentAddress,
@@ -118,7 +137,7 @@ export class ViewProfileComponent implements OnInit {
           currentPinCode: user.currentPinCode,
         });
       }
-  
+
       if (hasCompletePermanentAddress) {
         this.permanentAddressForm.patchValue({
           permanentAddress: user.permanentAddress,
@@ -128,7 +147,7 @@ export class ViewProfileComponent implements OnInit {
           permanentPinCode: user.permanentPinCode,
         });
       }
-  
+
       let dobValue: string | null;
       if (user.dateOfBirth instanceof Date) {
         dobValue = user.dateOfBirth.toISOString();
@@ -137,7 +156,7 @@ export class ViewProfileComponent implements OnInit {
       } else {
         dobValue = null;
       }
-  
+
       let anniversaryDateValue: string | null;
       if (user.anniversaryDate instanceof Date) {
         anniversaryDateValue = user.anniversaryDate.toISOString();
@@ -146,8 +165,8 @@ export class ViewProfileComponent implements OnInit {
       } else {
         anniversaryDateValue = null;
       }
-  
-  
+
+
       this.bioDataForm.patchValue({
         bloodGroup: user.bloodGroup,
         dateOfBirth: dobValue,

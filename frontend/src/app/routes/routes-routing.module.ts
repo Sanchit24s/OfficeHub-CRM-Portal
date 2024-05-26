@@ -44,6 +44,7 @@ const routes: Routes = [
       { path: 'leave', component: LeaveComponent},
       { path: 'attendance-display', component: AttendanceDisplayComponent},
       { path: 'notification', component: UserNotificationsComponent},
+      { path: 'userProfile', component: ViewProfileComponent},
       {
         path: '',
         canActivate: [adminGuard], 

@@ -12,7 +12,6 @@
     <li>
       <a [routerLink]="isAdmin ? '/notifications' : '/notification'"><mat-icon class="icon">notifications</mat-icon> <span class="text">Notifications</span></a>
     </li>
-    <li><a routerLink="/policy"><mat-icon class="icon">policy</mat-icon> <span class="text">Policy</span></a></li>
     <li *ngIf="isAdmin"><a routerLink="/get-users"><mat-icon class="icon">people</mat-icon> <span class="text">Employees</span></a></li>
     <!-- Add more menu items as needed -->
   </ul>

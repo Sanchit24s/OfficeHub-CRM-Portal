@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, User, GetUser } from '@core/authentication';
 import { Observable, Subscription } from 'rxjs';
 import { environment } from '@env/environment';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ProfileService } from '@core/services/profile.service';
+import { Users } from '@core/services/interface';
 
 @Component({
   selector: 'app-user-panel',
@@ -20,10 +21,10 @@ import { ProfileService } from '@core/services/profile.service';
       <h4 class="matero-user-panel-name">{{ user.firstName + ' ' + user.lastName }}</h4>
       <h5 class="matero-user-panel-email">{{ user.email }}</h5>
       <div class="matero-user-panel-icons">
-        <button mat-icon-button routerLink="/profile/overview" matTooltip="{{ 'profile' | translate }}">
+        <button mat-icon-button matTooltip="{{ 'profile' | translate }}" (click)="viewEmployee()">
           <mat-icon class="icon-18">account_circle</mat-icon>
         </button>
-        <button mat-icon-button routerLink="/profile/settings" matTooltip="{{ 'edit_profile' | translate }}">
+        <button mat-icon-button routerLink="/profile/overview" matTooltip="{{ 'edit_profile' | translate }}">
           <mat-icon class="icon-18">edit</mat-icon>
         </button>
         <button mat-icon-button (click)="logout()" matTooltip="{{ 'logout' | translate }}">
@@ -38,9 +39,10 @@ import { ProfileService } from '@core/services/profile.service';
 })
 export class UserPanelComponent implements OnInit {
   profilePicture: File | null = null;
-  user!: GetUser;
+  user!: Users;
 
   loginUserId: string | null = null;
+  loginUserRole: string | null = null;
   selectedFile: File | null = null;
 
   constructor(
@@ -48,11 +50,13 @@ export class UserPanelComponent implements OnInit {
     private auth: AuthService,
     private http: HttpClient,
     private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
     private profileService: ProfileService
   ) { }
 
   ngOnInit(): void {
     this.loginUserId = localStorage.getItem('userId');
+    this.loginUserRole = localStorage.getItem('userRole');
 
     if (this.loginUserId) {
       this.getUser().subscribe(user => (this.user = user));
@@ -66,8 +70,8 @@ export class UserPanelComponent implements OnInit {
     this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));
   }
 
-  getUser(): Observable<GetUser> {
-    return this.http.get<GetUser>(`${environment.apiUrl}/user/${this.loginUserId}`);
+  getUser(): Observable<Users> {
+    return this.http.get<Users>(`${environment.apiUrl}/user/${this.loginUserId}`);
   }
 
   sanitizeUrl(url: string): SafeUrl {
@@ -124,6 +128,17 @@ export class UserPanelComponent implements OnInit {
           console.error('error'+error);
         }
       );
+    }
+  }
+
+  viewEmployee(): void {
+    
+    const employeeId = this.user.employeeId; 
+    if(this.loginUserRole === 'ADMIN') {
+      this.router.navigate(['/viewProfile', employeeId], { relativeTo: this.route });
+    }
+    else {
+      this.router.navigate(['/userProfile']);
     }
   }
 }

@@ -1,5 +1,6 @@
 const UserModel = require('../models/user');
 const Attendance = require('../models/attendance');
+const leaveApp = require('../models/leave');
 const mongoose = require('mongoose');
 const { createTokenForUser } = require('../services/authentication');
 const { generateOTP } = require('../services/otp');
@@ -103,7 +104,7 @@ const update = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { gender, ...fieldsToUpdate } = req.body;
+    const { gender, firstName, lastName, email, ...fieldsToUpdate } = req.body;
 
     const defaultMaleImage = "http://localhost:3000/images/default-male1.jpg";
     const defaultFemaleImage = "http://localhost:3000/images/default-female1.jpg";
@@ -134,9 +135,49 @@ const update = async (req, res) => {
             }
         }
 
+        if (firstName) updateObj.firstName = firstName;
+        if (lastName) updateObj.lastName = lastName;
+        if (email) updateObj.email = email;
+
         const user = await UserModel.findByIdAndUpdate(id, updateObj, { useFindAndModify: false, new: true });
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Construct the full name if firstName or lastName is updated
+        let nameUpdateRequired = false;
+        let fullName;
+        if (firstName || lastName) {
+            fullName = `${user.firstName} ${user.lastName}`;
+            nameUpdateRequired = true;
+        }
+
+        // Update name and email in HolidayModel and AttendanceModel if they are updated
+        // Update name and email in HolidayModel and AttendanceModel if they are updated
+        if (nameUpdateRequired || email) {
+            let holidayUpdateObj = {};
+            let attendanceUpdateObj = {};
+            if (nameUpdateRequired) {
+                holidayUpdateObj.name = fullName;
+                attendanceUpdateObj.userName = fullName;
+            }
+            if (email) {
+                holidayUpdateObj.email = email;
+            }
+
+            try {
+                await leaveApp.updateMany({ employeeId: id }, holidayUpdateObj);
+                console.log('HolidayModel updated successfully');
+            } catch (error) {
+                console.error('Error updating HolidayModel:', error);
+            }
+
+            try {
+                await Attendance.updateMany({ employeeId: id }, attendanceUpdateObj);
+                console.log('AttendanceModel updated successfully');
+            } catch (error) {
+                console.error('Error updating AttendanceModel:', error);
+            }
         }
 
         console.log('Updated user:', user);
@@ -526,6 +567,26 @@ const handleProfilePictureUploadNew = async (req, res) => {
             id,
             { $set: { profileImage: imagePath } },
             { new: true }
+        );
+
+        // Update the profile image in today's attendance entry if present
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0); // Start of today
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999); // End of today
+
+        await Attendance.updateOne(
+            {
+                employeeId: id,
+                date: {
+                    $gte: startOfDay,
+                    $lt: endOfDay
+                }
+            },
+            {
+                $set: { profileImage: imagePath }
+            }
         );
 
         res.status(200).json({ message: 'Image upload successfully', userData });
