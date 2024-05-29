@@ -38,7 +38,6 @@ export class LeaveAdminComponent implements OnInit{
     this.leaveService.approveLeaveApplication(id)
       .subscribe(
         (data) => {
-          console.log('Leave Application Approved: ', data);
           this.fetchLeaveApplications();
         },
         (error) => {

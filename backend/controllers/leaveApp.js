@@ -73,7 +73,7 @@ const approve = async (req, res) => {
         const employeeId = req.params.id;
         const _id = employeeId;
         const leaveApplication = await leaveApp.findByIdAndUpdate(
-            { _id: employeeId },
+            _id,
             { status: 'Approved' },
             { new: true }
         );
@@ -88,13 +88,14 @@ const approve = async (req, res) => {
         for (let currentDate = new Date(startDate); currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
             const attendance = new Attendance({
                 employeeId: leaveApplication.employeeId,
+                userName: leaveApplication.name,
                 date: currentDate,
                 checkIn: '',
                 checkOut: '',
                 status: 'Leave'
             });
 
-            const savedAttendance = await attendance.save();
+            await attendance.save();
         }
 
         const leaveApps = await leaveApp.findById( _id );
@@ -107,14 +108,14 @@ const approve = async (req, res) => {
         const notification = {
             employeeId: foundEmployee.employeeId,
             title: `Leave application approved by HR`,
-            description: reason,
+            description: leaveApps.reason,
             date: date,
             isView: false,
             role: notificationRole
         }
 
         const newNotification = new notificationModel(notification);
-        const newNotice = await newNotification.save();
+        await newNotification.save();
 
         res.status(200).json(leaveApplication);
     } catch (error) {
@@ -152,7 +153,7 @@ const reject = async (req, res) => {
         }
 
         const newNotification = new notificationModel(notification);
-        const newNotice = await newNotification.save();
+        await newNotification.save();
 
         res.json(leaveApplication);
     } catch (error) {
