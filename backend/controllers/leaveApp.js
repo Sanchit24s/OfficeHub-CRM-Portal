@@ -78,9 +78,14 @@ const approve = async (req, res) => {
             { new: true }
         );
 
+
         if (!leaveApplication) {
             return res.status(404).json({ message: 'Leave application not found' });
         }
+
+        const leaveApps = await leaveApp.findById( _id );
+        const email = leaveApps.email;
+        const foundEmployee = await UserModel.findOne({ email });
 
         const startDate = new Date(leaveApplication.startDate);
         const endDate = new Date(leaveApplication.endDate);
@@ -92,15 +97,12 @@ const approve = async (req, res) => {
                 date: currentDate,
                 checkIn: '',
                 checkOut: '',
-                status: 'Leave'
+                status: 'Leave',
+                profileImage: foundEmployee.profileImage,
             });
 
             await attendance.save();
         }
-
-        const leaveApps = await leaveApp.findById( _id );
-        const email = leaveApps.email;
-        const foundEmployee = await UserModel.findOne({ email });
 
         const date = new Date();
         let notificationRole = 'EMPLOYEE';
