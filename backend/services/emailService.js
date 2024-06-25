@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   // host: 'smtp.ethereal.email',
@@ -8,8 +10,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'sanchitbhoyar12@gmail.com',
-    pass: 'dgxb bpmc mcea kckz'
+    user: process.env.EMAIL,
+    pass: process.env.PASS
   }
 });
 
@@ -18,7 +20,7 @@ async function sendOTP(email, otp) {
     const mailOptions = {
       from: {
         name: 'Sanchit',
-        address: 'sanchitbhoyar12@gmail.com'
+        address: process.env.EMAIL
       },
       to: email,
       subject: 'Your OTP Code',
@@ -42,7 +44,7 @@ async function sendUserCredentials(email, password, firstName, lastName) {
     const mailOptions = {
       from: {
         name: 'Sanchit',
-        address: 'sanchitbhoyar12@gmail.com'
+        address: process.env.EMAIL
       },
       to: email,
       subject: 'Your Credentials for Company Systems',
@@ -71,7 +73,7 @@ async function sendBirthdayEmail(user) {
     const mailOptions = {
       from: {
         name: 'Sanchit',
-        address: 'sanchitbhoyar12@gmail.com'
+        address: process.env.EMAIL
       },
       to: user.email,
       subject: 'Happy Birthday!',
@@ -94,7 +96,7 @@ async function sendAnniversaryEmail(user) {
     const mailOptions = {
       from: {
         name: 'Sanchit',
-        address: 'sanchitbhoyar12@gmail.com'
+        address: process.env.EMAIL
       },
       to: user.email,
       subject: 'Happy Anniversarry!',

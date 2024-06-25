@@ -12,6 +12,8 @@ const notificationRoute = require('./routes/notification.js');
 const path = require('path');
 const cors = require('cors');
 const cron = require('node-cron');
+const dotenv = require('dotenv');
+dotenv.config();
 
 
 mongoose.Promise = global.Promise;
@@ -58,8 +60,8 @@ app.use(cors({
 app.use('/images', express.static(path.join('public/default')));
 app.use('/image', express.static(path.join('public/uploads')));
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.json({ "message": "Hello Crud Node Express" });
 });

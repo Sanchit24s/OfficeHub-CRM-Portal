@@ -3,3 +3,5 @@
 
 # images came from the frontend
 /public/uploads
+
+.env
